@@ -1,0 +1,107 @@
+﻿Version=4
+IconFile=
+NumberOfModules=0
+Build1=Default,com.myanmarunicorn.timbercalculator
+DoNotOverwriteManifest=False
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="14"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:theme, "@android:style/Theme.Holo.Light.DarkActionBar")~\n~'End of default text.~\n~
+NumberOfFiles=1
+File1=Main.bal
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Timber Calculator
+	#VersionCode: 1
+	#VersionName: 1.0
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+
+End Sub
+
+Sub Globals
+	Private lblTitle As Label
+	Private lbl1 As Label
+	Private edt1 As EditText
+	Private lbl2 As Label
+	Private lbl3 As Label
+	Private edt2 As EditText
+	Private lbl4 As Label
+	Private lbl5 As Label
+	Private edt3 As EditText
+	Private spn1 As Spinner
+	Private lbl6 As Label
+	Private edt4 As EditText
+	Private lbl7 As Label
+	Private btnCalc As Button
+	Private lblSpecialThanks As Label
+	Private lblDeveloper As Label
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("Main")
+	lblTitle.Text = "သစ္ခြဲသား တြက္ရန္"
+	lbl1.Text = "ထု"
+	lbl3.Text = "ဗ်က္"
+	lbl5.Text = "အေရအတြက္"
+	spn1.AddAll(Array As String("ေပ", "တန္", "ေခ်ာင္း"))
+	lbl6.Text = "ႏႈန္းထား"
+	lbl7.Text = "က်ပ္"
+	btnCalc.Text = "တြက္ပါ"
+	lblSpecialThanks.Text = "ဤေဆာဖ့္ဝဲျဖစ္ေျမာက္ေရးအတြက္ အဖက္ဖက္မွကူညီေပးၾကေသာ အဖိုး ဦးတင္ဝင္း (သစ္ေတာဦးစီးအရာရွိ ၿငိမ္း) ႏွင့္ ဦးေလး ဦးေဇာ္လြင္ထြဋ္ (ျပည့္ၿဖိဳးေက်ာ္ သစ္ခြဲစက္) တို႔အား အထူးပင္ေက်းဇူးတင္ရွိပါသည္။"
+	lblDeveloper.Text = "ဖန္တီးသူ - ကိုေက်ာ္စြာသြင္ (ျမန္မာယူနီကြန္း)"
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub btnCalc_Click
+	If edt1.Text.Length = 0 Then
+		Msgbox("ထု ႐ိုက္ထည့္ပါ။", "Timber Calculator")
+		Return
+	Else If edt2.Text.Length = 0 Then
+		Msgbox("ဗ်က္ ႐ိုက္ထည့္ပါ။", "Timber Calculator")
+		Return
+	Else If edt3.Text.Length = 0 Then
+		Msgbox("အေရအတြက္ ႐ိုက္ထည့္ပါ။", "Timber Calculator")
+		Return
+	Else If edt4.Text.Length = 0 Then
+		Msgbox("ႏႈန္းထား ႐ိုက္ထည့္ပါ။", "Timber Calculator")
+		Return
+	End If
+	Dim i1 As Float = edt1.Text
+	Dim i2 As Float = edt2.Text
+	Dim i3 As Float = edt3.Text
+	Dim i4 As Int = edt4.Text
+	Dim a1 As Float
+	Dim a2 As Float
+	Dim a3 As Float
+	Select spn1.SelectedItem
+		Case "ေပ"
+			a1 = i3
+			a2 = (i3 / 7200) * (i1 * i2)
+			a3 = a1 / 18
+		Case "တန္"
+			a1 = (i3 * 7200) / (i1 * i2)
+			a2 = i3
+			a3 = a1 / 18
+		Case "ေခ်ာင္း"
+			a1 = i3 * 18
+			a2 = (a1 / 7200) * (i1 * i2)
+			a3 = i3
+	End Select
+	Dim a4 As Int = a3 * (i1 * i2) * i4
+	Msgbox("စုစုေပါင္းေပ = " & a1 & "'" & CRLF & "စုစုေပါင္းတန္ = " & a2 & " တန္" & CRLF & "18' အေခ်ာင္းေပါင္း = " & a3 & " ေခ်ာင္း" & CRLF & "သင့္ေငြ = " & a4 & " က်ပ္", "Timber Calculator")
+End Sub
